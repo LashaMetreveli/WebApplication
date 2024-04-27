@@ -11,7 +11,10 @@ public class WeatherController : Controller
 
     public async Task<ActionResult> Index()
     {
-        string[] locations = { "New York", "London", "Tokyo", "Sydney", "Tbilisi", "Chicago" }; // Add more locations as needed
+        string[] locations = {
+            "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose",
+            "Austin", "Jacksonville", "San Francisco", "Indianapolis", "Columbus", "Fort Worth", "Charlotte", "Seattle", "Denver", "Washington"
+};
 
         List<WeatherInfo> weatherInfos = new List<WeatherInfo>();
 
@@ -32,11 +35,15 @@ public class WeatherController : Controller
                     {
                         string jsonResponse = await response.Content.ReadAsStringAsync();
                         dynamic weatherData = JsonConvert.DeserializeObject(jsonResponse);
+                        Console.WriteLine(weatherData);
 
                         var weatherInfo = new WeatherInfo
                         {
                             Location = weatherData.location.name,
                             CurrentTemperature = weatherData.current.temp_c.ToString(),
+                            Condition = weatherData.current.condition.text,
+                            Humidity = weatherData.current.humidity,
+
                             // Add more properties as needed
                         };
 

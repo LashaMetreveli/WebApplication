@@ -40,22 +40,24 @@
                 <tr>
                     <th>Location</th>
                     <th>Current Temperature (°C)</th>
+                    <th>Condition</th>
+                    <th>Humidity</th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var weatherInfo in Model)
                 {
-                    <tr class="location-row" data-location="@weatherInfo.Location">
-                        <td>@weatherInfo.Location</td>
-                        <td>@weatherInfo.CurrentTemperature</td>
-                    </tr>
+                <tr class="location-row" data-location="@weatherInfo.Location">
+                    <td>@weatherInfo.Location</td>
+                    <td>@weatherInfo.CurrentTemperature</td>
+                    <td>@weatherInfo.Condition</td>
+                    <td>@weatherInfo.Humidity</td>
+
+                </tr>
                 }
             </tbody>
         </table>
     </div>
-    <div class="col-md-6">
-        <h2>Weather Details</h2>
-        <div id="weather-details">
-        </div>
-    </div>
+    
 </div>
