@@ -1,0 +1,61 @@
+﻿@model List<WeatherInfo>
+
+@{
+    ViewBag.Title = "Weather Information";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Weather Information</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script>
+        // Function to update server time every second
+        function updateServerTime() {
+            var serverTimeElement = document.getElementById('server-time');
+            setInterval(function () {
+                var now = new Date();
+                var serverTimeString = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2) + ' ' + ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2) + ':' + ('0' + now.getSeconds()).slice(-2);
+                serverTimeElement.textContent =  serverTimeString;
+            }, 1000); // Update every second
+        }
+
+        // Call the function when the document is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            updateServerTime();
+        });
+    </script>
+</head>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 id="server-time">@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Weather Information</h2>
+        <table class="weather-table">
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Current Temperature (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var weatherInfo in Model)
+                {
+                    <tr class="location-row" data-location="@weatherInfo.Location">
+                        <td>@weatherInfo.Location</td>
+                        <td>@weatherInfo.CurrentTemperature</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Weather Details</h2>
+        <div id="weather-details">
+        </div>
+    </div>
+</div>
